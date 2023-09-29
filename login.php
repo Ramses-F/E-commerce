@@ -18,21 +18,32 @@
     </ul>
     <div class="tab-content">
       <div id="signup">
-        <h1>Register</h1>
+        <h1 hidden>Register</h1>
         <form action="/" method="post">
           <div class="top-row">
             <div class="field-wrap">
-              <input type="text" required placeholder="First Name" />
+              <input type="text" required style="color:black" placeholder="First Name" />
             </div>
             <div class="field-wrap">
-              <input type="text" required placeholder="Last Name" />
+              <input type="text" required style="color:black" placeholder="Last Name" />
+            </div>
+          </div>
+          <div class="top-row">
+            <div class="field-wrap">
+              <input type="text" required style="color:black" placeholder="Question secrète" />
+            </div>
+            <div class="field-wrap">
+              <input type="text" required style="color:black" placeholder="Reponse à la question" />
             </div>
           </div>
           <div class="field-wrap">
-            <input type="email" required placeholder="Email Address"/>
+            <input type="email" required style="color:black" placeholder="Email Address"/>
           </div>
           <div class="field-wrap">
-            <input type="password" required placeholder="Password" />
+            <input type="password" required style="color:black" placeholder="Password" />
+          </div>
+          <div class="field-wrap">
+            <input type="password" required style="color:black" placeholder="Confirm password" />
           </div>
           <button type="submit" class="button button-block" />Sign Up</button>
         </form>
