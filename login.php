@@ -49,16 +49,28 @@
         </form>
       </div>
       <div id="login">
-        <h1>Welcome Back!</h1>
+        <h1 style="color:black">Welcome Back!</h1>
         <form action="/" method="post">
           <div class="field-wrap">
-            <input type="email" required placeholder="Email" />
+            <input type="email" style="color:black" required placeholder="Email" />
           </div>
           <div class="field-wrap">
-            <input type="password" required placeholder="Password" />
+            <input type="password" style="color:black" required placeholder="Password" />
           </div>
-          <p class="forgot"><a href="https://www.web-leb.com/code">Forgot Password?</a></p>
+          <p class="forgot tab-group tab"><a href="#forget">Forgot Password?</a></p>
           <button class="button button-block" />Login</button>
+        </form>
+      </div>
+      <div id="forget">
+        <h1 style="color:black">Enter and respond your question</h1>
+        <form action="/" method="post">
+          <div class="field-wrap">
+            <input type="text" name="quest" style="color:black" required placeholder="Enter your question" />
+          </div>
+          <div class="field-wrap">
+            <input type="test" name="answer" style="color:black" required placeholder="Enter your answer" />
+          </div>
+          <button class="button button-block" />Answer</button>
         </form>
       </div>
     </div>

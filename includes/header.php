@@ -80,11 +80,6 @@
 							<ul class="main-menu flex-wrap flex-column justify-items-justify">
 								<li class="active-menu">
 									<a href="index.php">Home</a>
-									<ul class="sub-menu" hidden>
-										<li><a href="index.php">Homepage 1</a></li>
-										<li><a href="home-02.php">Homepage 2</a></li>
-										<li><a href="home-03.php">Homepage 3</a></li>
-									</ul>
 								</li>
 								<li>
 									<a href="product.php">Shop</a>
@@ -134,71 +129,141 @@
 		</div>
 
 		<!-- Modal -->
-			<div class="modal fade pt-5" id="modall">
-				<div class="modal-dialog modal-dialog-centered modal-xl">
+			<div class="modal fade" id="modall" style="padding-top:80px">
+				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
 	  				<div class="modal-content">
+						<div class="modal-header">
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						</div>
 						<!--Modal body-->
 						<div class="modal-body">
-							<div class="col-md-11 bg-white rounded-2 d-flex flex-column">
-							<div class="proprio-infos d-flex ">
-								<div class="col-md-6 justify-content-center">
-									<div class="col-3 d-flex align-items-center justify-content-center">
-			
-										<div class="imggg d-flex align-items-center justify-content-center" style="height: 150px;width: auto;">
-											<!--<i class="fa-solid fa-user"></i>--> 
-											<img src="images/avatar-01.jpg ?>" style="height: 100%;" class="rounded-2">
+								<div id="account">
+									<div class="col-md-11 bg-white rounded-2 d-flex flex-column">
+										<div class="proprio-infos d-flex row">
+											<div class="col-md-6 justify-content-center">
+												<div class="col-3 d-flex align-items-center justify-content-center">
+
+													<div class="imggg d-flex align-items-center justify-content-center" style="height: 150px;width: auto;">
+														<!--<i class="fa-solid fa-user"></i>--> 
+														<img src="images/avatar-01.jpg ?>" style="height: 100%;" class="rounded-2">
+													</div>
+												</div>
+												<div class="public">
+													<p class="proprio-type d-flex justify-content-start rounded-2 mb-4"
+														style="color:#000; font-weight:bolder; font-size: 1.5em;"> BBB I AM
+													</p>
+													<p class="location">
+														<i class="fa-solid fa-location-dot"></i>
+														<span>&nbsp;&nbsp; <br> Abidjan, Côte
+															d'Ivoire</span>
+													</p>
+													<p class="nb-ads"> 280 Achats
+													</p>
+													<p class="member-since">Membre depuis le
+														<span>27/02/2021
+														</span>
+													</p>
+												</div>
+											</div>
+											<div class="col-md-6 d-flex flex-column justify-content-start">
+												<div class="apropos">
+													<h5 style="font-weight:bolder; text-decoration:underline;">Informations du compte</h5>
+												</div>
+												<div class="desboutons row py-3">
+													<div class="col mx-1">
+														<label for="" style="font-weight: bolder;">Email :</label>
+														<input type="text" name="mail" id="" value="sss" style="border: none; border-bottom:2px solid gold">
+														<label for="" class="pt-3" style="font-weight: bolder;">Nom :</label>
+														<input type="text" name="name" id="" value="sss" style="border: none; border-bottom:2px solid gold">
+														<label for="" class="pt-3" style="font-weight: bolder;">Password :</label>
+														<input type="password" name="pwd" id="" value="123456" style="border: none; border-bottom:2px solid gold">
+														<label for="" class="pt-3" style="font-weight: bolder;">Address :</label>
+														<input type="text" name="pwd" id="" value="yopougon" style="border: none; border-bottom:2px solid gold">
+													</div>
+													<div class="col">
+														<label for="" style="font-weight: bolder;">Number :</label>
+														<input type="text" name="num" id="" value="02030101" style="border: none; border-bottom:2px solid gold">
+														<label for="" class="pt-3" style="font-weight: bolder;">Question secrète :</label>
+														<input type="text" name="num" id="" value="02030101" style="border: none; border-bottom:2px solid gold">
+														<label for="" class="pt-3" style="font-weight: bolder;">Réponse :</label>
+														<input type="text" name="num" id="" value="02030101" style="border: none; border-bottom:2px solid gold">
+													</div>
+												</div>
+											</div>
+
 										</div>
-									</div>
-									<div class="public">
-										<p class="proprio-type d-flex justify-content-start rounded-2 mb-4"
-											style="color:#000; font-weight:bolder; font-size: 1.5em;"> BBB I AM
-										</p>
-										<p class="location">
-											<i class="fa-solid fa-location-dot"></i>
-											<span>&nbsp;&nbsp; <br> Abidjan, Côte
-												d'Ivoire</span>
-										</p>
-										<p class="nb-ads"> 280 Achats
-										</p>
-										<p class="member-since">Membre depuis le
-											<span>27/02/2021
-											</span>
-										</p>
 									</div>
 								</div>
-								<div class="col-md-6 d-flex flex-column justify-content-start">
-									<div class="apropos">
-										<h5>Informations du compte</h5>
-									</div>
-									<div class="desboutons row py-3">
-										<div class="col mx-1">
-											<label for="" style="font-weight: bolder;">Email :</label>
-											<input type="text" name="mail" id="" value="sss" style="border: none; border-bottom:2px solid gold">
-											<label for="" class="pt-3" style="font-weight: bolder;">Nom :</label>
-											<input type="text" name="name" id="" value="sss" style="border: none; border-bottom:2px solid gold">
-											<label for="" class="pt-3" style="font-weight: bolder;">Password :</label>
-											<input type="password" name="pwd" id="" value="123456" style="border: none; border-bottom:2px solid gold">
-											<label for="" class="pt-3" style="font-weight: bolder;">Address :</label>
-											<input type="text" name="pwd" id="" value="yopougon" style="border: none; border-bottom:2px solid gold">
-										</div>
-										<div class="col">
-											<label for="" style="font-weight: bolder;">Number :</label>
-											<input type="text" name="num" id="" value="02030101" style="border: none; border-bottom:2px solid gold">
-											<label for="" class="pt-3" style="font-weight: bolder;">Question secrète :</label>
-											<input type="text" name="num" id="" value="02030101" style="border: none; border-bottom:2px solid gold">
-											<label for="" class="pt-3" style="font-weight: bolder;">Réponse :</label>
-											<input type="text" name="num" id="" value="02030101" style="border: none; border-bottom:2px solid gold">
-										</div>
-									</div>
+								<div id="buying">
+									<h3 class="my-4" style="font-weight:bolder; text-decoration:underline;">Liste de mes achats</h3>
+									<table class="table" style="border:1px; width:100%">
+                            			<thead>
+                            			  <tr style="color:orange">
+                            			    <th style="font-size: 1.2rem;">Nom article</th>
+                            			    <th style="font-size: 1.2rem;">Catégorie</th>
+                            			    <th style="font-size: 1.2rem;">Prix unitaire</th>
+                            			    <th style="font-size: 1.2rem;">Quantité commandée</th>
+                            			    <th style="font-size: 1.2rem;">Statut achat</th>
+                            			  </tr>
+                            			</thead>
+                            			<tbody>
+                            			    <tr style="font-weight:bold; font-size: 1.1rem;">
+                            			        <td colspan="5"><center>Date des achats : <span> 18/09/2023 </span> </center></td>
+                            			    </tr>  
+                            			    <tr style="color:#000; font-size:1rem; font-weight:bold;">
+                            			        <td>T-shirts elephants</td>
+                            			        <td>T-shirts</td>
+                            			        <td>12000 FCFA</td>
+                            			        <td>3</td>
+                            			        <td>Livré</td>
+                            			    </tr>
+                            			    <tr style="color:#000; font-size:1rem; font-weight:bold;">
+                            			        <td>T-shirts elephants</td>
+                            			        <td>T-shirts</td>
+                            			        <td>12000 FCFA</td>
+                            			        <td>3</td>
+                            			        <td>Livré</td>
+                            			    </tr>
+                            			    <tr style="color:#000; font-size:1rem; font-weight:bold;">
+                            			        <td>T-shirts elephants</td>
+                            			        <td>T-shirts</td>
+                            			        <td>12000 FCFA</td>
+                            			        <td>3</td>
+                            			        <td>Livré</td>
+                            			    </tr>
+                            			    <tr style="background-color:darkorange; color:#fff; font-weight:bold; font-size: 1.1rem;">
+                            			      <td colspan="5"><center>Date des achats : <span> 23/09/2023 </span> </center></td>
+                            			    </tr>
+                            			    <tr style="color:#000; font-size:1rem; font-weight:bold;">
+                            			        <td>T-shirts elephants</td>
+                            			        <td>T-shirts</td>
+                            			        <td>12000 FCFA</td>
+                            			        <td>3</td>
+                            			        <td>Livré</td>
+                            			    </tr>
+                            			    <tr style="color:#000; font-size:1rem; font-weight:bold;">
+                            			        <td>T-shirts elephants</td>
+                            			        <td>T-shirts</td>
+                            			        <td>12000 FCFA</td>
+                            			        <td>3</td>
+                            			        <td>Livré</td>
+                            			    </tr>
+                            			    <tr style="color:#000; font-size:1rem; font-weight:bold;">
+                            			        <td>T-shirts elephants</td>
+                            			        <td>T-shirts</td>
+                            			        <td>12000 FCFA</td>
+                            			        <td>3</td>
+                            			        <td>Livré</td>
+                            			    </tr>
+                            			</tbody>
+									</table>
 								</div>
-			
-							</div>
-						</div>
+
 						</div>
 						<!--Modal footer-->
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary">Save changes</button>
-							<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+							<button type="button" href="#account" class="btn btn-primary tab active">Mon compte</button>
+							<button type="button" class="btn btn-success">Save changes</button>
 		  					<button type="button" class="btn btn-secondary">Disconnect</button>
 						</div>
 	  				</div>
@@ -215,7 +280,7 @@
 
 			<!-- Icon header -->
 			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search" data-bs-toggle="modal" data-bs-target="#modall">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11">
 					<i class="zmdi zmdi-account"></i>
 				</div>
 
@@ -246,7 +311,7 @@
 			<ul class="topbar-mobile">
 				<li>
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
+						<a href="login.php" class="flex-c-m p-lr-10 trans-04">
 							Login
 						</a>
 					</div>
@@ -402,13 +467,13 @@
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Women New Season
+									Célébrons ensemble
 								</span>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									SHIRTS AND FRAME
+									la can
 								</h2>
 							</div>
 								
@@ -421,23 +486,23 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(images/can2.jpg);">
+				<div class="item-slick1" style="background-image: url(images/abidjan.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
-								<span class="ltext-101 cl2 respon2">
-									Men New-Season
+								<span class="ltext-101 cl2 respon2" style="color:#fff">
+									Repartez avec des souvenirs
 								</span>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
-								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									Jackets & Coats
+								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1" style="color:#fff">
+									d'Abidjan
 								</h2>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-								<a href="product.php" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+								<a href="product.php?prod=access" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" style="color:#fff">
 									Shop Now
 								</a>
 							</div>
@@ -445,18 +510,18 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(images/akwaba.jpg);">
+				<div class="item-slick1" style="background-image: url(images/shirts.png);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									Men Collection 2018
+									Des maillots 2023
 								</span>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									New arrivals
+									originaux !
 								</h2>
 							</div>
 								
