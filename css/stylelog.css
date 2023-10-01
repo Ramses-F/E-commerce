@@ -5,7 +5,7 @@
  body {
   	height: 100vh;
 	background: #01939c;
-   	overflow-y: hidden!important;
+   	overflow-y: scroll!important;
 	font-family: 'Poppins', sans-serif;
 }
  a {
@@ -23,7 +23,6 @@
 	 margin: 40px auto;
 	 border-radius: 15px;
 	 box-shadow: 0 4px 10px 4px rgba(19, 35, 47, .3);
-	 overflow:auto;
 }
  .tab-group {
 	 list-style: none;
