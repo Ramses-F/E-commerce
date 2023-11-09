@@ -161,6 +161,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				</button>
 
 				<div class="row">
+					<?php
+						$getInfosClient = $db->prepare("SELECT * FROM tb_produit  WHERE id_prod= :id ");
+						$getInfosClient->bindParam(":id", $id_client, PDO::PARAM_INT);
+						
+						if ($getInfosClient->execute()) {
+						  $getInfosClient_resultats = $getInfosClient->fetchAll(PDO::FETCH_OBJ);
+						  if ($getInfosClient->rowCount() > 0) {
+							foreach ($getInfosClient_resultats as $getInfosClient_resultats) {
+							  $nom_user = $getInfosClient_resultats->name_user;
+							  $email = $getInfosClient_resultats->email;
+							  $def_add = $getInfosClient_resultats->default_address;
+							  $contact = $getInfosClient_resultats->contact;
+							}
+						  }
+						}
+					?>
 					<div class="col-md-6 col-lg-7 p-b-30">
 						<div class="p-l-25 p-r-30 p-lr-0-lg">
 							<div class="wrap-slick3 flex-sb flex-w">
@@ -227,10 +243,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 										<div class="rs1-select2 bor8 bg0">
 											<select class="js-select2" name="time">
 												<option>Choose an option</option>
-												<option>Size S</option>
-												<option>Size M</option>
-												<option>Size L</option>
-												<option>Size XL</option>
+												<option value="S" >Size S</option>
+												<option value="M" >Size M</option>
+												<option value="L" >Size L</option>
+												<option value="XL" >Size XL</option>
 											</select>
 											<div class="dropDownSelect2"></div>
 										</div>
@@ -322,13 +338,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		})
 	</script>
 <!--===============================================================================================-->
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!--<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script>
 	function googleTranslateElementInit() {
 		new google.translate.TranslateElement({pageLanguage: 'en'},
 		 'google_translate_element');
 		}
-</script>
+</script>-->
 <!--===============================================================================================-->
 	<script src="vendor/daterangepicker/moment.min.js"></script>
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>

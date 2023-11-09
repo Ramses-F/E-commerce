@@ -24,17 +24,17 @@
 	 border-radius: 15px;
 	 box-shadow: 0 4px 10px 4px rgba(19, 35, 47, .3);
 }
- .tab-group {
+ .bat-group {
 	 list-style: none;
 	 padding: 0;
 	 margin: 0 0 40px 0;
 }
- .tab-group:after {
+ .bat-group:after {
 	 content: "";
 	 display: table;
 	 clear: both;
 }
- .tab-group li a {
+ .bat-group li a {
 	 display: block;
 	 text-decoration: none;
 	 padding: 15px;
@@ -47,24 +47,24 @@
 	 cursor: pointer;
 	 transition: 0.5s ease;
 }
- .tab-group li a:hover {
+ .bat-group li a:hover {
 	 background: #01939c;
 	 color: #fff;
 }
- .tab-group .active a {
+ .bat-group .active a {
 	 background: #01939c;
 	 color: #fff;
 }
- .tab-content > div:last-child {
+ .bat-content > div:last-child {
 	 display: none;
 }
-.tab-group{
+.bat-group{
   border-radius: 15px!important;
   margin: 20px;
 }
  h1 {
 	 text-align: center;
-	 color: #fff;
+	 color: aqua;
 	 font-weight: 300;
 	 margin: 0 0 40px;
 }

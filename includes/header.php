@@ -1,59 +1,13 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-	<title>E-Commerce</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/slick/slick.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/MagnificPopup/magnific-popup.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-<!--===============================================================================================-->
-</head>
-<body class="animsition">
-	
-	<!-- Header -->
-	<header>
+<!-- Header -->
+<header>
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
-			<div class="top-bar">
+			<div class="top-bar" style="background:transparent">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="right-top-bar flex-w h-full">
-						<a href="login.php" class="flex-c-m trans-04 p-lr-25">
-							Login
-						</a>
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
+						<!--<a href="#" id="google_translate_element" class="flex-c-m trans-04 p-lr-25">
+						</a>-->
 					</div>
 				</div>
 			</div>
@@ -109,20 +63,28 @@
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
+						<?php 
+						    if (isset($_SESSION["id_user"])) {
+						?>
 						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11" data-bs-toggle="modal" data-bs-target="#modall">
 							<i class="zmdi zmdi-account"></i>
 						</a>
+						<?php
+							}else{
+						?>
+						<a href="login.php" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+							<i class="zmdi zmdi-account-add"></i>
+						</a>
+						<?php
+							}
+						?>
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-							<i class="zmdi zmdi-shopping-cart"></i>
+						<div class="icon-header-item cl2 hov-cl 1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart">
+							<a href="shoping-cart.php" style="text-decoration: none; color: cl2"><i class="zmdi zmdi-shopping-cart"></i></a>
 						</div>
-
-						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
 					</div>
 				</nav>
 			</div>	
@@ -136,7 +98,7 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 						</div>
 						<!--Modal body-->
-						<div class="modal-body">
+						<div class="modal-body">`
 								<div id="account">
 									<div class="col-md-11 bg-white rounded-2 d-flex flex-column">
 										<div class="proprio-infos d-flex row">
@@ -169,28 +131,60 @@
 												<div class="apropos">
 													<h5 style="font-weight:bolder; text-decoration:underline;">Informations du compte</h5>
 												</div>
+												<form action="" method="post">
 												<div class="desboutons row py-3">
+													<?php
+														if (isset($_POST['subnew'])){
+															$nom = $_POST["nom"];
+															$email = $_POST["mail"];
+															$num = $_POST["num"];
+															$address = $_POST["adress"];
+
+															$modinfos = $db->prepare("UPDATE tb_users SET name_user = :nom, contact = :num, email = :mail, default_address = :adress WHERE id_user = :id");
+                                    						$modinfos->bindParam(":nom", $nom, PDO::PARAM_STR);
+                                    						$modinfos->bindParam(":num", $num, PDO::PARAM_STR);
+                                    						$modinfos->bindParam(":mail", $email, PDO::PARAM_STR);
+                                    						$modinfos->bindParam(":adress", $address, PDO::PARAM_STR);
+                                    						$modinfos->bindParam(":id", $id_user, PDO::PARAM_INT);
+                                    						$modinfos->execute();
+														}
+
+														$getInfosClient = $db->prepare("SELECT * FROM tb_users  WHERE id_user= :id ");
+														  $getInfosClient->bindParam(":id", $id_user, PDO::PARAM_INT);
+														
+														  if ($getInfosClient->execute()) {
+															$getInfosClient_resultats = $getInfosClient->fetchAll(PDO::FETCH_OBJ);
+															if ($getInfosClient->rowCount() > 0) {
+															  foreach ($getInfosClient_resultats as $getInfosClient_resultats) {
+																$nom_user = $getInfosClient_resultats->name_user;
+																$email = $getInfosClient_resultats->email;
+																$def_add = $getInfosClient_resultats->default_address;
+																$contact = $getInfosClient_resultats->contact;
+															  }
+															}
+														  }
+													?>
 													<div class="col mx-1">
 														<label for="" style="font-weight: bolder;">Email :</label>
-														<input type="text" name="mail" id="" value="sss" style="border: none; border-bottom:2px solid gold">
+														<input type="text" name="mail" id="" value="<?php echo $email?>"
+														style="border: none; border-bottom:2px solid gold">
 														<label for="" class="pt-3" style="font-weight: bolder;">Nom :</label>
-														<input type="text" name="name" id="" value="sss" style="border: none; border-bottom:2px solid gold">
-														<label for="" class="pt-3" style="font-weight: bolder;">Password :</label>
-														<input type="password" name="pwd" id="" value="123456" style="border: none; border-bottom:2px solid gold">
+														<input type="text" name="nom" id="" value="<?php echo $nom_user?>"
+														style="border: none; border-bottom:2px solid gold">
+														<label for="" class="pt-3" style="font-weight: bolder;">Password :</label><br>
+														<button onclick="window.location.href='changemdp.php'"
+														style="border: none; border:2px solid gold"> Change the password </button><br>
 														<label for="" class="pt-3" style="font-weight: bolder;">Address :</label>
-														<input type="text" name="pwd" id="" value="yopougon" style="border: none; border-bottom:2px solid gold">
+														<input type="text" name="adress" id="" value="<?php echo $def_add?>" style="border: none; border-bottom:2px solid gold">
 													</div>
 													<div class="col">
 														<label for="" style="font-weight: bolder;">Number :</label>
-														<input type="text" name="num" id="" value="02030101" style="border: none; border-bottom:2px solid gold">
-														<label for="" class="pt-3" style="font-weight: bolder;">Question secrète :</label>
-														<input type="text" name="num" id="" value="02030101" style="border: none; border-bottom:2px solid gold">
-														<label for="" class="pt-3" style="font-weight: bolder;">Réponse :</label>
-														<input type="text" name="num" id="" value="02030101" style="border: none; border-bottom:2px solid gold">
+														<input type="text" name="num" id="" value="<?php echo $contact?>" style="border: none; border-bottom:2px solid gold">
 													</div>
 												</div>
+												<button type="submit" name="subnew" class="btn btn-success d-flex align-item-center justify-content-end">Save changes</button>
+												</form>
 											</div>
-
 										</div>
 									</div>
 								</div>
@@ -263,10 +257,10 @@
 						<!--Modal footer-->
 						<div class="modal-footer">
 							<button type="button" href="#account" class="btn btn-primary tab active">Mon compte</button>
-							<button type="button" class="btn btn-success">Save changes</button>
-		  					<button type="button" class="btn btn-secondary">Disconnect</button>
+		  					<button type="button" onclick="window.Location.href='logout.php'" class="btn btn-secondary">Disconnect</button>
 						</div>
 	  				</div>
+					</form>
 				</div>
   			</div>
 			<!--End modal-->
@@ -372,7 +366,7 @@
 	</header>
 
 	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart">
+	<div class="wrap-header-cart js-panel-cart" hidden>
 		<div class="s-full js-hide-cart"></div>
 
 		<div class="header-cart flex-col-l p-l-65 p-r-25">
@@ -385,7 +379,6 @@
 					<i class="zmdi zmdi-close"></i>
 				</div>
 			</div>
-			
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
 					<li class="header-cart-item flex-w flex-t m-b-12">
@@ -502,7 +495,9 @@
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-								<a href="product.php?prod=access" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" style="color:#fff">
+								<a href="product.php?prod=access" 
+								class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" 
+								style="color:#fff">
 									Shop Now
 								</a>
 							</div>
@@ -535,4 +530,4 @@
 				</div>
 			</div>
 		</div>
-	</section>
+</section>
