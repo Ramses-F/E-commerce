@@ -6,8 +6,6 @@
 			<div class="top-bar" style="background:transparent">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="right-top-bar flex-w h-full">
-						<!--<a href="#" id="google_translate_element" class="flex-c-m trans-04 p-lr-25">
-						</a>-->
 					</div>
 				</div>
 			</div>
@@ -15,9 +13,10 @@
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
 					
-					<!-- Logo desktop -->		
+					<!-- Logo desktop -->
 					<a href="#" class="logo">
-						<button class="p-3 mx-4" style="border: none; font-size:1.3em;font-weight:bolder;" data-bs-toggle="offcanvas" data-bs-target="#menu">
+						<button class="p-3 mx-4" style="border: none; font-size:1.3em;font-weight:bolder;"
+						data-bs-toggle="offcanvas" data-bs-target="#menu">
 						Menu
 						</button>
 						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
@@ -63,10 +62,11 @@
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
-						<?php 
-						    if (isset($_SESSION["id_user"])) {
+						<?php
+						    if (isset($_SESSION['id_user'])) {
 						?>
-						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11" data-bs-toggle="modal" data-bs-target="#modall">
+						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11"
+						data-bs-toggle="modal" data-bs-target="#modall">
 							<i class="zmdi zmdi-account"></i>
 						</a>
 						<?php
@@ -78,16 +78,17 @@
 						<?php
 							}
 						?>
+
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl 1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart">
+						<div class="icon-header-item cl2 hov-cl 1 trans-04 p-l-22 p-r-11 icon-header-noti">
 							<a href="shoping-cart.php" style="text-decoration: none; color: cl2"><i class="zmdi zmdi-shopping-cart"></i></a>
 						</div>
 					</div>
 				</nav>
-			</div>	
+			</div>
 		</div>
 
 		<!-- Modal -->
@@ -106,8 +107,8 @@
 												<div class="col-3 d-flex align-items-center justify-content-center">
 
 													<div class="imggg d-flex align-items-center justify-content-center" style="height: 150px;width: auto;">
-														<!--<i class="fa-solid fa-user"></i>--> 
-														<img src="images/avatar-01.jpg ?>" style="height: 100%;" class="rounded-2">
+														<img src="images/avatar-01.jpg ?>" alt=""
+														style="height: 100%;" class="rounded-2">
 													</div>
 												</div>
 												<div class="public">
@@ -175,14 +176,17 @@
 														<button onclick="window.location.href='changemdp.php'"
 														style="border: none; border:2px solid gold"> Change the password </button><br>
 														<label for="" class="pt-3" style="font-weight: bolder;">Address :</label>
-														<input type="text" name="adress" id="" value="<?php echo $def_add?>" style="border: none; border-bottom:2px solid gold">
+														<input type="text" name="adress" id="" value="<?php echo $def_add?>"
+														style="border: none; border-bottom:2px solid gold">
 													</div>
 													<div class="col">
 														<label for="" style="font-weight: bolder;">Number :</label>
-														<input type="text" name="num" id="" value="<?php echo $contact?>" style="border: none; border-bottom:2px solid gold">
+														<input type="text" name="num" id="" value="<?php echo $contact?>"
+														style="border: none; border-bottom:2px solid gold">
 													</div>
 												</div>
-												<button type="submit" name="subnew" class="btn btn-success d-flex align-item-center justify-content-end">Save changes</button>
+												<button type="submit" name="subnew"
+												class="btn btn-success d-flex align-item-center justify-content-end">Save changes</button>
 												</form>
 											</div>
 										</div>
@@ -202,31 +206,11 @@
                             			</thead>
                             			<tbody>
                             			    <tr style="font-weight:bold; font-size: 1.1rem;">
-                            			        <td colspan="5"><center>Date des achats : <span> 18/09/2023 </span> </center></td>
-                            			    </tr>  
-                            			    <tr style="color:#000; font-size:1rem; font-weight:bold;">
-                            			        <td>T-shirts elephants</td>
-                            			        <td>T-shirts</td>
-                            			        <td>12000 FCFA</td>
-                            			        <td>3</td>
-                            			        <td>Livré</td>
-                            			    </tr>
-                            			    <tr style="color:#000; font-size:1rem; font-weight:bold;">
-                            			        <td>T-shirts elephants</td>
-                            			        <td>T-shirts</td>
-                            			        <td>12000 FCFA</td>
-                            			        <td>3</td>
-                            			        <td>Livré</td>
-                            			    </tr>
-                            			    <tr style="color:#000; font-size:1rem; font-weight:bold;">
-                            			        <td>T-shirts elephants</td>
-                            			        <td>T-shirts</td>
-                            			        <td>12000 FCFA</td>
-                            			        <td>3</td>
-                            			        <td>Livré</td>
-                            			    </tr>
-                            			    <tr style="background-color:darkorange; color:#fff; font-weight:bold; font-size: 1.1rem;">
-                            			      <td colspan="5"><center>Date des achats : <span> 23/09/2023 </span> </center></td>
+                            			        <td colspan="5">
+													<center>
+														Date des achats : <span> 18/09/2023 </span> 
+													</center>
+												</td>
                             			    </tr>
                             			    <tr style="color:#000; font-size:1rem; font-weight:bold;">
                             			        <td>T-shirts elephants</td>
@@ -257,7 +241,7 @@
 						<!--Modal footer-->
 						<div class="modal-footer">
 							<button type="button" href="#account" class="btn btn-primary tab active">Mon compte</button>
-		  					<button type="button" onclick="window.Location.href='logout.php'" class="btn btn-secondary">Disconnect</button>
+		  					<a style="margin:3px; background-color:red; text-decoration:none; color:#fff" href="logout.php">Disconnect</a>
 						</div>
 	  				</div>
 					</form>
@@ -267,7 +251,7 @@
 
 		<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
-			<!-- Logo moblie -->		
+			<!-- Logo moblie -->
 			<div class="logo-mobile">
 				<a href="index.php"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
@@ -355,7 +339,7 @@
 					<img src="images/icons/icon-close2.png" alt="CLOSE">
 				</button>
 
-				<form class="wrap-search-header flex-w p-l-15">
+				<form class="wrap-search-header flex-w p-l-15" action="resultsearch.php" method="get">
 					<button class="flex-c-m trans-04">
 						<i class="zmdi zmdi-search"></i>
 					</button>
@@ -495,8 +479,8 @@
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-								<a href="product.php?prod=access" 
-								class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" 
+								<a href="product.php?prod=access"
+								class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04"
 								style="color:#fff">
 									Shop Now
 								</a>

@@ -1,6 +1,8 @@
 <?php
 session_start();
 include "config/db.php";
+if(1){
+}
 
 if (isset($_POST["submit"])) {
 

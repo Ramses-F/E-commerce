@@ -39,11 +39,13 @@ CREATE TABLE tb_medias(
     foreign key (id_prod) references tb_produit(id_prod)
 );    
 
-CREATE TABLE tb_commande(
+CREATE TABLE tb_commandes(
     code_com int not null primary key auto_increment,
     id_prod int,
     id_user int,
     date_com date,
+    email_user VARCHAR(255),
+    phone_user int,
     Foreign Key (id_prod) REFERENCES tb_produit(id_prod),
     Foreign Key (id_user) REFERENCES tb_users(id_user),
 );    
@@ -54,6 +56,32 @@ create table tb_option (
     color varchar(20),
     foreign key (id_prod) references tb_produit(id_prod)
 )
+CREATE TABLE tb_carts (
+  id_cart INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  id_user INT,
+  creation_date DATE,
+  FOREIGN KEY (id_user) REFERENCES tb_users(id_user)
+);
+CREATE TABLE tb_items_cart (
+  id_cart_item INT AUTO_INCREMENT PRIMARY KEY,
+  id_cart INT,
+  id_prod INT,
+  quantity INT,
+  id_opt INT,  -- Référence à la table des options de produits
+  FOREIGN KEY (id_cart) REFERENCES tb_carts(id_cart),
+  FOREIGN KEY (id_prod) REFERENCES tb_produit(id_prod),
+  FOREIGN KEY (id_opt) REFERENCES tb_option(id_opt)
+);
+CREATE TABLE com_items (
+  id_com_item INT AUTO_INCREMENT PRIMARY KEY,
+  id_com INT ,
+  id_prod INT ,
+  qteItem INT ,
+  id_opt INT,  -- Référence à la table des options de produits
+  FOREIGN KEY (id_com) REFERENCES tb_commandes(code_com),
+  FOREIGN KEY (id_prod) REFERENCES tb_produit(id_prod),
+  FOREIGN KEY (id_opt) REFERENCES tb_option(id_option)
+);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

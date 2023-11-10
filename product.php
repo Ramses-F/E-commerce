@@ -1,3 +1,12 @@
+<?php
+session_start();
+include 'config/db.php';
+
+if(1){
+}
+if (isset($_GET['cat']) && !empty($_GET['cat'])) {
+	$id_cat = $_GET['cat']
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -279,29 +288,42 @@
 			</div>
 
 			<div class="row isotope-grid">
+			<?php
+					$getInfosProd = $db->prepare("SELECT * FROM tb_produit WHERE id_cat = :id_cat");
+					$getInfosProd->bindValue(':id_cat', $id_cat, PDO::PARAM_INT);
+					
+					if ($getInfosProd->execute()) {
+					  $getInfosProd_resultats = $getInfosProd->fetchAll(PDO::FETCH_OBJ);
+					  if ($getInfosProd->rowCount() > 0) {
+						foreach ($getInfosProd_resultats as $getInfosProd_resultats) {
+						  $id_prod = $getInfosProd_resultats->id_prod;
+						  $title = $getInfosProd_resultats->title;
+						  $descrip = $getInfosProd_resultats->descrip;
+						  $price = $getInfosProd_resultats->price;
+				?>
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-01.jpg" alt="IMG-PRODUCT">
 
-							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-								Quick View
+							<a href="product-detail.php?pid=<?php echo $id_prod?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								View
 							</a>
 						</div>
 
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									Esprit Ruffle Shirt
+								<a href="product-detail.php?pid=<?php echo $id_prod?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<?php echo $title?>
 								</a>
 
 								<span class="stext-105 cl3">
-									$16.64
+									<?php echo $price?> FCFA
 								</span>
 							</div>
 
-							<div class="block2-txt-child2 flex-r p-t-3">
+							<div class="block2-txt-child2 flex-r p-t-3" hidden>
 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
 									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
@@ -310,6 +332,13 @@
 						</div>
 					</div>
 				</div>
+				<?php
+						}
+					}
+				}else{
+						echo 'Aucun produit';
+					}
+				?>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
@@ -790,13 +819,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-
-			<!-- Load more -->
-			<div class="flex-c-m flex-w w-full p-t-45">
-				<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-					Load More
-				</a>
 			</div>
 		</div>
 	</div>
@@ -3073,6 +3095,9 @@
 		
 
 	<!-- Footer -->
-	<?php 
-	include_once 'includes/footer.php';
-	?>
+<?php 
+	include 'includes/footer.php';
+}
+?>
+</body>
+</html>

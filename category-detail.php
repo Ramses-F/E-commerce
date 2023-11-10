@@ -4,13 +4,13 @@
 	<title>Blog Detail</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<?php 
+<?php
 include_once 'includes/header.php';
 ?>
 
@@ -58,7 +58,7 @@ include_once 'includes/header.php';
 						<div class="p-t-32">
 							<span class="flex-w flex-m stext-111 cl2 p-b-19">
 								<span>
-									<span class="cl4">By</span> Admin  
+									<span class="cl4">By</span> Admin
 									<span class="cl12 m-l-4 m-r-6">|</span>
 								</span>
 
@@ -68,7 +68,7 @@ include_once 'includes/header.php';
 								</span>
 
 								<span>
-									StreetStyle, Fashion, Couple  
+									StreetStyle, Fashion, Couple
 									<span class="cl12 m-l-4 m-r-6">|</span>
 								</span>
 
@@ -380,13 +380,13 @@ include_once 'includes/header.php';
 				</div>
 			</div>
 		</div>
-	</section>	
+	</section>
 	
 		
 
 	<!-- Footer -->
 
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>

@@ -6,6 +6,58 @@ if (isset($_GET['pid']) && !empty(['pid'])){
 	$id = $_GET['pid'];
 
 	$id_user = $_SESSION['id_user'];
+
+	if (isset($_POST['addpanier'])){
+
+		// Vérifier si l'utilisateur a déjà un panier en cours
+		if (!isset($_SESSION['current_cart_id'])) {
+			// Insérer un nouveau panier
+			$insert_cart = $db->prepare("INSERT INTO tb_carts (id_user, creation_date) 
+			VALUES (:id_user, NOW())");
+			$insert_cart->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+			$insert_cart->execute([$id_user]);
+
+			// Récupérez du dernier panier créé
+			$id_cart = $db->lastInsertId();
+
+			// Enregistrer l'id du panier dans la session pour une utilisation ultérieure
+			$_SESSION['current_cart_id'] = $id_cart;
+		} else {
+			// Récupérer l'id du panier actuel depuis la session
+			$id_cart = $_SESSION['current_cart_id'];
+		}
+
+		// Ajouter les éléments du panier séléctionés
+		$color = $_POST['color'];
+		$qte = $_POST['qteProd'];
+		$size = $_POST['size'];  // Option spécifique du produit, si applicable
+
+		// Insérer dans la table tb_option pour obtenir l'id de l'option
+		$insert_option = $db->prepare("INSERT INTO tb_option (id_prod, size_prod, color, qteProd) 
+		VALUES (:id, :size, :color, :qteProd)");
+		$insert_option->bindParam(':id', $id, PDO::PARAM_INT);
+		$insert_option->bindParam(':size', $size, PDO::PARAM_STR);
+		$insert_option->bindParam(':color', $color, PDO::PARAM_STR);
+		$insert_option->bindParam(':qteProd', $qte, PDO::PARAM_STR);
+		$insert_option->execute();
+
+		// Récupérer l'id de l'option nouvellement insérée
+		$id_opt = $db->lastInsertId();
+
+		// Insérer dans la table tb_items_cart
+		$insert_cart_item = $db->prepare("INSERT INTO tb_items_cart (id_cart, id_prod, id_opt)
+		VALUES (:id_cart, :id_prod, :id_opt)");
+		$insert_cart_item->bindParam(':id_cart', $id_cart, PDO::PARAM_INT);
+		$insert_cart_item->bindParam(':id_prod', $id, PDO::PARAM_INT);
+		$insert_cart_item->bindParam(':id_opt', $id_opt, PDO::PARAM_INT);
+
+		//Vérifie si le panier est ajoutée
+		if($insert_cart_item->execute()){
+		echo "Produit ajouté au panier.";
+		}else{
+		echo "Erreur lors de l'ajout";
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -85,11 +137,6 @@ if (isset($_GET['pid']) && !empty(['pid'])){
 					  $price = $getInfosProd_resultats->price;
 					  $id_cat = $getInfosProd_resultats->id_cat;
 					  $mail = $getInfosProd_resultats->mail_seller;
-					  if (1 == 1) {
-						if (isset($_POST["addpanier"])) {
-						  creationPanier();
-						  ajouterArticle($id_produit, $title, 1, $price, $id_cat);
-						}
 			?>
 			<div class="row">
 				<div class="col-md-6 col-lg-7 p-b-30">
@@ -165,21 +212,32 @@ if (isset($_GET['pid']) && !empty(['pid'])){
 								</div>
 
 								<div class="size-204 respon6-next">
-									<input class="mtext-104 cl3 txt-center" style="border-bottom: 2px solid violet;" type="text" name="color" placeholder="Veuillez entrer la couleur" Required>
+									<input class="mtext-104 cl3 txt-center" style="border-bottom: 2px solid violet;" 
+									type="text" name="color" placeholder="Veuillez entrer la couleur" Required>
+								</div>
+							</div>
+
+							<div class="flex-w flex-r-m p-b-10">
+								<div class="size-203 flex-c-m respon6">
+									Quantité
+								</div>
+
+								<div class="size-204 respon6-next">
+									<input class="mtext-104 cl3 txt-center" style="border-bottom: 2px solid violet;" 
+									type="text" name="qteProd" placeholder="Veuillez entrer la quantité" Required>
 								</div>
 							</div>
 
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-204 flex-w flex-m respon6-next">
-									<form method="post" action="">
-										<button type="submit" name="addpanier" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+										<button type="submit" name="addpanier" 
+										class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 											Add to cart
 										</button>
-									</form>
 								</div>
-							</div>	
+							</div>
 						</div>
-
+					</form>
 						<!--  -->
 						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 							<div class="flex-m bor9 p-r-10 m-r-11">
@@ -356,8 +414,7 @@ if (isset($_GET['pid']) && !empty(['pid'])){
 				Categories: Jacket, Men
 			</span>
 		</div>
-		<?php 
-						}
+		<?php
 					}
 				}
 			}
@@ -641,6 +698,5 @@ if (isset($_GET['pid']) && !empty(['pid'])){
 	<!-- Footer -->
 <?php
 include_once 'includes/footer.php';
-
 }
 ?>

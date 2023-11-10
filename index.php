@@ -1,9 +1,10 @@
 <?php
+session_start();
 include 'config/db.php';
 
-if (isset($_SESSION["id_user"])) {
-  $id_user = $_SESSION["id_user"];
-}
+if (isset($_SESSION['id_user'])) {
+  $id_user = $_SESSION['id_user'];
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -52,44 +53,35 @@ if (isset($_SESSION["id_user"])) {
 	<div class="sec-banner bg0 p-t-80 p-b-50">
 		<div class="container">
 			<div class="row">
+				<?php
+				$getCat = $db->prepare("SELECT * FROM tb_categorie");
+
+				if($getCat->execute()){
+				$getCat_results = $getCat->fetchAll(PDO::FETCH_OBJ);
+				if($getCat->rowCount() > 0){
+					foreach ($getCat_results as $cat) {
+						$id = $cat->id_cat;
+						$title = $cat->title;
+				?>
 				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 					<!-- Block1 -->
 					<div class="block1 wrap-pic-w">
-						<img src="images/banner-01.jpg" alt="IMG-BANNER">
-
-						<a href="product.php" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Women
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									Spring 2018
-								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
+						<?php
+						if($id == 1){
+						?>
 						<img src="images/banner-02.jpg" alt="IMG-BANNER">
-
-						<a href="product.php" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<?php
+						}else{
+						?>
+						<img src="images/banner-01.jpg" alt="IMG-BANNER">
+						<?php
+						}
+						?>
+						<a href="product.php?cat=<?php echo $id ?>" 
+							class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Men
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									Spring 2018
+									<?php echo $title ?>
 								</span>
 							</div>
 
@@ -101,33 +93,11 @@ if (isset($_SESSION["id_user"])) {
 						</a>
 					</div>
 				</div>
-
-				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-						<img src="images/banner-03.jpg" alt="IMG-BANNER">
-
-						<a href="product.php" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Accessories
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									New Trend
-								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-
-				</div>
+				<?php
+						}
+					}
+				}
+				?>
 			</div>
 		</div>
 	</div>
@@ -378,7 +348,7 @@ if (isset($_SESSION["id_user"])) {
 
 			<div class="row isotope-grid">
 				<?php
-					$getInfosProd = $db->prepare("SELECT * FROM tb_produit");
+					$getInfosProd = $db->prepare("SELECT * FROM tb_produit LIMIT 12 DESC");
 					
 					if ($getInfosProd->execute()) {
 					  $getInfosProd_resultats = $getInfosProd->fetchAll(PDO::FETCH_OBJ);
@@ -389,13 +359,14 @@ if (isset($_SESSION["id_user"])) {
 						  $descrip = $getInfosProd_resultats->descrip;
 						  $price = $getInfosProd_resultats->price;
 				?>
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-01.jpg" alt="IMG-PRODUCT">
 
-							<a href="product-detail.php?pid=<?php echo $id_prod?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+							<a href="product-detail.php?pid=<?php echo $id_prod?>"
+							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 								View
 							</a>
 						</div>
@@ -411,7 +382,7 @@ if (isset($_SESSION["id_user"])) {
 								</span>
 							</div>
 
-							<div class="block2-txt-child2 flex-r p-t-3">
+							<div class="block2-txt-child2 flex-r p-t-3" hidden>
 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
 									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
@@ -441,6 +412,9 @@ if (isset($_SESSION["id_user"])) {
 
 
 	<!-- Footer -->
-	<?php
+<?php
 	include_once 'includes/footer.php';
-	?>
+			}
+?>
+</body>
+</html>
