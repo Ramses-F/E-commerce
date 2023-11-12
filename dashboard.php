@@ -5,7 +5,7 @@ include 'config/db.php';
 
 if (isset($_SESSION['id_user'])) {
   $id_user = $_SESSION['id_user'];
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -415,6 +415,7 @@ if (isset($_SESSION['id_user'])) {
 	<!-- Footer -->
 <?php
 	include 'includes/footer.php';
+}
 ?>
 </body>
 </html>

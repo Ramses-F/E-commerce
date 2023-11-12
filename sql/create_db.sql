@@ -6,6 +6,14 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `db_webcom` DEFAULT CHARACTER SET utf8 ;
 USE `db_webcom` ;
 
+create table tb_admin(
+    id_admin int not null auto_increment primary key,
+    email varchar(255),
+    admin_mdp varchar(255)
+);
+
+INSERT INTO `tb_admin`(`id_admin`, `email`, `admin_mdp`) VALUES (null, 'kamagatefallet3@gmail.com', 'Je suis en vie')
+
 CREATE TABLE tb_categorie(
     id_cat int not null primary key auto_increment,
     title varchar(60)
@@ -29,15 +37,9 @@ CREATE TABLE tb_produit(
     descrip varchar(300),
     price int,
     mail_seller varchar(80),
+    img_prod varchar(255),
     foreign key (id_cat) references tb_categorie(id_cat)
 );
-
-CREATE TABLE tb_medias(
-    id_media int not null primary key auto_increment,
-    id_prod int,
-    title_med varchar(80),
-    foreign key (id_prod) references tb_produit(id_prod)
-);    
 
 CREATE TABLE tb_commandes(
     code_com int not null primary key auto_increment,

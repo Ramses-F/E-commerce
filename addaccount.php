@@ -83,7 +83,7 @@ if (isset($_POST["submit"])) {
 <body>
   <div class="form">
     <ul class="bat-group">
-      <li class="bat active">
+      <li class="bat">
         <a href="addaccount.php" style="border-radius: 15px!important;margin-right:8px;">Sign Up</a>
       </li>
       <li class="bat"><a href="login.php" style="border-radius: 15px!important;margin-left:8px;">Log In</a></li>

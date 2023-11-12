@@ -137,6 +137,7 @@ if (isset($_GET['pid']) && !empty(['pid'])){
 					  $price = $getInfosProd_resultats->price;
 					  $id_cat = $getInfosProd_resultats->id_cat;
 					  $mail = $getInfosProd_resultats->mail_seller;
+					  $img = $getInfosProd_resultats->img_prod;
 			?>
 			<div class="row">
 				<div class="col-md-6 col-lg-7 p-b-30">
@@ -148,7 +149,7 @@ if (isset($_GET['pid']) && !empty(['pid'])){
 							<div class="slick3 gallery-lb">
 								<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
 									<div class="wrap-pic-w pos-relative">
-										<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+										<img src="<?php echo $img ?>" alt="IMG-PRODUCT">
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
 											<i class="fa fa-expand"></i>
@@ -156,7 +157,7 @@ if (isset($_GET['pid']) && !empty(['pid'])){
 									</div>
 								</div>
 
-								<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
+								<div class="item-slick3" data-thumb="images/product-detail-02.jpg" hidden>
 									<div class="wrap-pic-w pos-relative">
 										<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
@@ -166,7 +167,7 @@ if (isset($_GET['pid']) && !empty(['pid'])){
 									</div>
 								</div>
 
-								<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
+								<div class="item-slick3" data-thumb="images/product-detail-03.jpg" hidden>
 									<div class="wrap-pic-w pos-relative">
 										<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
 

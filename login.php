@@ -23,7 +23,7 @@ if (isset($_POST["submit"])) {
               $idd = $user->id_user;
               $_SESSION["id_user"] = $idd;
               $_SESSION["email"] = $email;
-              header('Location: index.php'); // Redirige l'utilisateur vers la page d'accueil
+              header('Location: dashboard.php'); // Redirige l'utilisateur vers la page d'accueil
               exit;
           } else {
               echo "<p style='color: red;font-size: 1rem;text-align: center;'>Mot de passe incorrect.</p>";
@@ -78,7 +78,7 @@ if (isset($_POST["submit"])) {
         </form>
       </div>
       <!--Fin login-->
-      
+
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
