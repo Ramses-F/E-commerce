@@ -5,7 +5,7 @@ if (1) {
 if (isset($_SESSION['id_admin'])) {
     header('location:dashboard.php');
 }else {
-    include 'db.php';
+    include '../config/db.php';
 
 ?>  
 
@@ -300,7 +300,7 @@ if (isset($_SESSION['id_admin'])) {
 
                         if (!empty($email) && !empty($password)) {
 
-                            $requete = $db->prepare("SELECT * FROM tb_admins WHERE email_admin = :email AND mdp_admin = :password_");
+                            $requete = $db->prepare("SELECT * FROM tb_admin WHERE email = :email AND admin_mdp = :password_");
                             $requete->bindParam(":email", $email, PDO::PARAM_STR);
                             $requete->bindParam(":password_", $password, PDO::PARAM_STR);
                             $requete->execute();

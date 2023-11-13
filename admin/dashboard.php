@@ -56,7 +56,7 @@ if (isset($_SESSION['id_admin'])){
             <ul>
                 <li><a href="index.php">Acceuil</a></li>
                 <li><a href="listprod.php">Liste des produits</a></li>
-                <li><a href="../logout.php">Déconnexion</a></li>
+                <li><a href="logout.php">Déconnexion</a></li>
             </ul>
         </menu>
     </div>
@@ -69,23 +69,19 @@ if (isset($_SESSION['id_admin'])){
         $price = $_POST['prix'];
         $descrip = $_POST['descript'];
         $mail = $_POST['mail_seller'];
-        $img = $_POST['image'];
+        $img = $_POST['img_prod'];
         $cat = $_POST['categorie'];
 
-        if(!empty($nom) && !empty($pric) && !empty($descrip) && !empty($mail) && !empty($cat) && !empty($img)){
-                        //Ajout de l'image
-            //$dayy = date('Ymdahis', time());
-            $dayy = date('Ymdhisa', time());
-            $new_name = 'PROD' . $dayy . "." . $extension;
-            $addProduit = $db->prepare("INSERT INTO tb_produits(title, price, descrip, id_cat, img_prod, mail_seller)
-            VALUES (:titre, :prix, :description_, :id_cat, :img_prod, :mail_seller");
-            $addProduit->bindParam(':titre', $title, PDO::PARAM_STR);
+        if(!empty($title) && !empty($price) && !empty($descrip) && !empty($mail) && !empty($cat) && !empty($img)){
+            $addProduit = $db->prepare("INSERT INTO tb_produit(title, price, descrip, id_cat, img_prod, mail_seller)
+            VALUES (:title, :prix, :descript, :categorie, :img_prod, :mail_seller)");
+            $addProduit->bindParam(':title', $title, PDO::PARAM_STR);
             $addProduit->bindParam(':prix', $price, PDO::PARAM_STR);
-            $addProduit->bindParam(':descrip', $descript, PDO::PARAM_STR);
+            $addProduit->bindParam(':descript', $descrip, PDO::PARAM_STR);
             $addProduit->bindParam(':mail_seller', $mail, PDO::PARAM_STR);
             $addProduit->bindParam(':categorie', $cat, PDO::PARAM_STR);
-            $addProduit->bindParam(':img', $new_name, PDO::PARAM_STR);
-            if($addProduit->execute()) {
+            $addProduit->bindParam(':img_prod', $img, PDO::PARAM_STR);
+            if ($addProduit->execute()) {
                 echo "Produit mis en ligne";
             }else{
                 echo "Il y a des erreurs";
@@ -95,9 +91,9 @@ if (isset($_SESSION['id_admin'])){
     ?>
     <form action="" method="post">
         <label for="nom">Nom du produit : </label><br/>
-        <input type="text" name="title" required placeholder="Entrer le nom de votre produit"><br/>
+        <input type="text" name="title" style="width: 50%;" required placeholder="Entrer le nom de votre produit"><br/>
         <label for="prix">Prix : </label><br/>
-        <input type="number" min="0" max="99999999999999999
+        <input type="number" style="width: 50%;" min="100" max="99999999999999999
         "name="prix" required placeholder="Entrer le prix de votre produit"><br/>
         <label for="" class="form-label">Catégorie</label>
         <select class="form-select form-select-lg" id="cat" name="categorie" required>
@@ -121,12 +117,12 @@ if (isset($_SESSION['id_admin'])){
         
         </select>
         <label for="description">Description : </label><br/>
-        <textarea name="descript" rows="8" cols="80" required></textarea><br/>
-        <label for="mail_vendeur">Email du vendeur : </label><br/>
-        <textarea name="mail_seller" rows="8" cols="80" required></textarea><br/>
-        <label for="image">Image : </label><br/>
-        <input type="file" accept=".jpg,.png,.jpeg,.gif" name="img" required><br/>
-        <button type="submit" name="poster">Poster</button>
+        <textarea name="descript" rows="5" cols="80" required></textarea><br/>
+        <label for="mail_seller">Email du vendeur : </label><br/>
+        <input name="mail_seller" style="width: 50%;" required><br/>
+        <label for="img-">Image : </label><br/>
+        <input type="file" accept=".jpg,.png,.jpeg,.gif" name="img_prod" required><br/>
+        <button type="submit" style="margin-top:10px" name="poster">Poster</button>
     </form>
 </div>
 </body>

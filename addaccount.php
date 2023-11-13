@@ -1,8 +1,7 @@
 <?php
 session_start();
 include "config/db.php";
-if(1){
-}
+
 
 if (isset($_POST["submit"])) {
 
@@ -91,7 +90,6 @@ if (isset($_POST["submit"])) {
     <div class="bat-content">
 
       <!--Register a user-->
-      <div id="signup">
         <h1 style="color:black">Inscription</h1>
         <form action="" id="form_add_user" method="post">
             <div class="field-wrap">
@@ -122,7 +120,6 @@ if (isset($_POST["submit"])) {
             </div>
             <button type="submit" class="button button-block" name="submit" />Sign Up</button>
         </form>
-      </div>
       <!--Fin register part-->
       
     </div>

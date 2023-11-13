@@ -63,7 +63,6 @@ if (isset($_POST["submit"])) {
     </ul>
     <div class="bat-content">
       <!--Log in de l'user-->
-      <div id="login">
         <h1 style="color:black">Connectez-vous !</h1>
         <form action="" method="post">
           <div class="field-wrap">
@@ -74,9 +73,8 @@ if (isset($_POST["submit"])) {
             <i class="uil uil-eye-slash pw_hide"></i>
           </div>
           <p class="forgot bat-group bat"><a href="forgetmdp.php">Forgot Password?</a></p>
-          <button class="button button-block" name="submit"/>Login</button>
+          <button class="button button-block" name="submit">Login</button>
         </form>
-      </div>
       <!--Fin login-->
 
     </div>

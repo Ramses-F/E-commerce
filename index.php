@@ -1,11 +1,7 @@
 <?php
-
 session_start();
 include 'config/db.php';
-
-if (isset($_SESSION['id_user'])) {
-  $id_user = $_SESSION['id_user'];
-}
+if(1){}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -48,8 +44,7 @@ if (isset($_SESSION['id_user'])) {
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
-<?php include_once 'includes/header.php';
-?>
+<?php include_once 'includes/header.php';?>
 	<!-- Banner -->
 	<div class="sec-banner bg0 p-t-80 p-b-50">
 		<div class="container">
@@ -78,7 +73,7 @@ if (isset($_SESSION['id_user'])) {
 						<?php
 						}
 						?>
-						<a href="product.php?cat=<?php echo $id ?>" 
+						<a href="product.php?cat=<?php echo $id ?>"
 							class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
@@ -126,10 +121,6 @@ if (isset($_SESSION['id_user'])) {
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
 						Men
 					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".access">
-						Accessoires
-					</button>
 				</div>
 
 				<div class="flex-w flex-c-m m-tb-10">
@@ -152,9 +143,11 @@ if (isset($_SESSION['id_user'])) {
 						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
 							<i class="zmdi zmdi-search"></i>
 						</button>
-
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-					</div>	
+						<form action="index.php?search=<?php echo $_GET['search-prod']?>" method="get">
+							<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" 
+							name="search-prod" placeholder="Search">
+						</form>
+					</div>
 				</div>
 
 				<!-- Filter -->
@@ -347,9 +340,9 @@ if (isset($_SESSION['id_user'])) {
 				</div>
 			</div>
 
-			<div class="row isotope-grid">
+			<div class="row">
 				<?php
-					$getInfosProd = $db->prepare("SELECT * FROM tb_produit LIMIT 12 DESC");
+					$getInfosProd = $db->prepare("SELECT * FROM tb_produit LIMIT 12");
 					
 					if ($getInfosProd->execute()) {
 					  $getInfosProd_resultats = $getInfosProd->fetchAll(PDO::FETCH_OBJ);
@@ -359,8 +352,9 @@ if (isset($_SESSION['id_user'])) {
 						  $title = $getInfosProd_resultats->title;
 						  $descrip = $getInfosProd_resultats->descrip;
 						  $price = $getInfosProd_resultats->price;
+						  $img = $getInfosProd_resultats->img_prod;
 				?>
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
@@ -394,10 +388,59 @@ if (isset($_SESSION['id_user'])) {
 				</div>
 				<?php
 						}
-					} else {
+					  }elseif(isset($_GET['search-prod'])){
+						$requete = "SELECT * FROM tb_produit WHERE LOWER(`title`) OR ('price')
+						LIKE '%" . strtolower($_GET["search-prod"]) . "%'";
+                        $stmt = $db->prepare($requete);
+                        $stmt->execute();
+						$results = $stmt->fetchAll(PDO::FETCH_OBJ);
+						if ($stmt->rowCount() > 0) {
+							foreach ($results as $result) {
+								$id_prod = $result->id_prod;
+								$title = $result->title;
+								$descrip = $result->descrip;
+								$price = $result->price;
+								$img = $result->img_prod;
+				?>
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img src="<?php echo $img_prod?>" alt="images/product-01.jpg">
+
+							<a href="product-detail.php?pid=<?php echo $id_prod?>"
+							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+								View
+							</a>
+						</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="product-detail.php?pid=<?php echo $id_prod?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<?php echo $title?>
+								</a>
+
+								<span class="stext-105 cl3">
+									<?php echo $price?> FCFA
+								</span>
+							</div>
+
+							<div class="block2-txt-child2 flex-r p-t-3" hidden>
+								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php				
+					} 
+				}else {
 					echo 'Aucun produit';
 					}
 				}
+			}
 			?>
 				
 			</div>
@@ -417,4 +460,4 @@ if (isset($_SESSION['id_user'])) {
 	include 'includes/footer.php';
 ?>
 </body>
-</html>
+</html>	

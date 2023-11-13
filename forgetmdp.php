@@ -98,7 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="bat-content">
 
       <!--Mot de passe oublié-->
-        <div id="forget">
             <h1 style="color:black">Retrouvez votre mot de passe</h1>
             <form action="" method="post">
                 <div class="field-wrap">
@@ -109,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <button class="button button-block" />Answer</button>
             </form>
-        </div>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

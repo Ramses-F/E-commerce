@@ -2,6 +2,7 @@
 session_start();
 include 'config/db.php';
 
+if(1){}
 if (isset($_SESSION['id_user'])) {
     $id_user = $_SESSION['id_user'];
 
@@ -10,26 +11,34 @@ if (isset($_SESSION['id_user'])) {
         $id_cart = $_SESSION['current_cart_id'];
 
         // Vérifier si un e-mail a déjà été envoyé pour ce panier
-        $check_email_sent = $db->prepare("SELECT COUNT(*) FROM tb_commandes WHERE id_cart = ?");
-        $check_email_sent->execute([$id_cart]);
+        $check_email_sent = $db->prepare("SELECT COUNT(*) FROM tb_commandes WHERE id_cart = :id_cart");
+		$check_email_sent->bindParam(':id_cart', $id_cart, PDO::PARAM_STR);
+        $check_email_sent->execute();
         $email_sent_count = $check_email_sent->fetchColumn();
 
         if ($email_sent_count == 0) {
             // Récupérer l'e-mail et le numéro de téléphone de l'utilisateur depuis la table tb_users
-            $get_user_info = $db->prepare("SELECT email, contact FROM tb_users WHERE id_user = ?");
-            $get_user_info->execute([$id_user]);
+            $get_user_info = $db->prepare("SELECT email, contact FROM tb_users WHERE id_user = :id_user");
+			$get_user_info->bindParam(':id_user', $id_user, PDO::PARAM_STR);
+            $get_user_info->execute();
             $user_info = $get_user_info->fetch(PDO::FETCH_ASSOC);
 
             $user_email = $user_info['email'];
             $user_phone = $user_info['contact'];
 
             // Insérer la commande dans la table tb_commandes
-            $insert_commande = $db->prepare("INSERT INTO tb_commandes (id_cart, id_user, date_com, email_user, phone_user) VALUES (?, ?, NOW(), ?, ?)");
-            $insert_commande->execute([$id_cart, $id_user, $user_email, $user_phone]);
+            $insert_commande = $db->prepare("INSERT INTO tb_commandes (id_cart, id_user, date_com, email_user, phone_user)
+			VALUES (:id_cart, :id_user, NOW(), :email_user, :phone_user)");
+			$check_email_sent->bindParam(':id_cart', $id_cart, PDO::PARAM_STR);
+			$check_email_sent->bindParam(':id_user', $id_user, PDO::PARAM_STR);
+			$check_email_sent->bindParam(':email_user', $user_email, PDO::PARAM_STR);
+			$check_email_sent->bindParam(':phone_user', $user_phone, PDO::PARAM_STR);
+            $insert_commande->execute();
 
             // Mettre à jour le statut du panier
-            $update_cart_status = $db->prepare("UPDATE tb_carts SET status = 'Traitée' WHERE id_cart = ?");
-            $update_cart_status->execute([$id_cart]);
+            $update_cart_status = $db->prepare("UPDATE tb_carts SET status = 'Traitée' WHERE id_cart = :id_cart");
+			$update_cart_status->bindParam(':id_cart', $id_cart, PDO::PARAM_STR);
+            $update_cart_status->execute();
 
             // Réinitialiser l'id du panier actuel dans la session
             unset($_SESSION['current_cart_id']);
@@ -39,8 +48,9 @@ if (isset($_SESSION['id_user'])) {
                                              FROM tb_items_cart ci
                                              JOIN tb_option oi ON ci.id_opt = oi.id_opt
                                              JOIN tb_produit p ON ci.id_prod = p.id_prod
-                                             WHERE ci.id_cart = ?");
-            $get_cart_details->execute([$id_cart]);
+                                             WHERE ci.id_cart = :id_cart");
+			$get_cart_details->bindParam(':id_cart', $id_cart, PDO::PARAM_STR);
+            $get_cart_details->execute();
             $cart_details = $get_cart_details->fetchAll(PDO::FETCH_ASSOC);
 
             // Construire le corps de l'e-mail avec les détails de la commande
@@ -127,7 +137,7 @@ if (isset($_SESSION['id_user'])) {
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
 						<div class="wrap-table-shopping-cart">
-							<?php 
+							<?php
 								$id_cart = $_SESSION['current_cart_id'];
 								if (isset($_POST['refresh_cart_item'])) {
 									$id_cart_item = $_POST['id_cart_items'];
@@ -135,8 +145,13 @@ if (isset($_SESSION['id_user'])) {
 									$color = $_POST['color'];
 								
 									// Mettre à jour la quantité et la couleur dans la table tb_items_cart
-									$update_cart_item = $db->prepare("UPDATE tb_items_cart SET quantity = ?, color = ? WHERE id_cart_item = ?");
-									$update_cart_item->execute([$quantity, $color, $id_cart_item]);
+									$update_cart_item = $db->prepare("UPDATE tb_items_cart
+									SET quantity = :quantity, color = :color
+									WHERE id_cart_item =:id_cart_items");
+									$update_cart_item->bindParam(':quantity', $quantity, PDO::PARAM_STR);
+									$update_cart_item->bindParam(':color', $color, PDO::PARAM_STR);
+									$update_cart_item->bindParam(':id_cart_items', $id_cart_item, PDO::PARAM_STR);
+									$update_cart_item->execute();
 								
 									echo "Produit mis à jour dans le panier.";
 								}
@@ -145,8 +160,9 @@ if (isset($_SESSION['id_user'])) {
 															   FROM tb_items_cart ci
 															   JOIN tb_produit p ON ci.id_prod = p.id_prod
 															   LEFT JOIN tb_option oi ON ci.id_opt = oi.id_opt
-															   WHERE ci.id_cart = ?");
-								$get_cart_items->execute([$id_cart]);
+															   WHERE ci.id_cart = :id_cart");
+								$get_cart_items->bindParam('id_cart', $id_cart, PDO::PARAM_STR);
+								$get_cart_items->execute();
 							
 								if ($get_cart_items->rowCount() > 0) {
 							?>
@@ -172,7 +188,7 @@ if (isset($_SESSION['id_user'])) {
 								?>
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="images/item-cart-04.jpg" alt="IMG">
+											<img src="ima6ges/item-cart-04.jpg" alt="IMG">
 										</div>
 									</td>
 									<td class="column-2"><?php echo $cart_item['title']; ?></td>
@@ -184,7 +200,9 @@ if (isset($_SESSION['id_user'])) {
 									</td>
 									<td class="column-5">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<input class="mtext-104 cl3 txt-center num-product" type="text" name="color" style="border-bottom: 2px solid violet;" value="<?php echo $cart_item['color']; ?>?>">
+											<input class="mtext-104 cl3 txt-center num-product"
+											type="text" name="color" style="border-bottom: 2px solid violet;" 
+											value="<?php echo $cart_item['color']; ?>?>">
 										</div>
 									</td>
 									<td class="column-6">
@@ -193,7 +211,9 @@ if (isset($_SESSION['id_user'])) {
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="qte" style="border-bottom: 2px solid violet;" value="<?php echo $cart_item['qteProd']; ?>?>" min="1">
+											<input class="mtext-104 cl3 txt-center num-product" 
+											type="number" name="qte" style="border-bottom: 2px solid violet;" 
+											value="<?php echo $cart_item['qteProd']; ?>?>" min="1">
 
 											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-plus"></i>
